@@ -17,7 +17,8 @@ public class BaseAction {
 	protected HttpServletRequest request;
 	protected HttpSession session;
 	protected HttpServletResponse response;	
-	protected String json;	//	反馈的json
+	protected String json;					// 反馈的json
+	protected Pages pages;				  	// 分页对象
 	
 	public HttpServletRequest getRequest() {
 		return request;
@@ -42,5 +43,40 @@ public class BaseAction {
 	public void setJson(String json) {
 		this.json = json;
 	}
-		
+	
+	public void setPage(int page) {
+		if (pages == null) {
+			pages = new Pages();
+		}
+		pages.setCpage(page);
+	}
+
+	public void setRows(int rows) {
+		if (pages == null) {
+			pages = new Pages();
+		}
+		pages.setPageNum(rows);
+	}
+	
+	public void setSidx (String sidx) {
+		if (pages == null) {
+			pages = new Pages();
+		}
+		pages.setSidx(sidx);
+	}
+
+	public void setSord (String sord) {
+		if (pages == null) {
+			pages = new Pages();
+		}
+		pages.setSord(sord);
+	}
+
+	public Pages getPages() {
+		return pages;
+	}
+
+	public void setPages(Pages pages) {
+		this.pages = pages;
+	}
 }
