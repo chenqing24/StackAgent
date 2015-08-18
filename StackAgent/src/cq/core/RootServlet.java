@@ -12,7 +12,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import cq.core.ClassForName.ClassForNameException;
+import cq.core.exception.ActionException;
+import cq.core.exception.ClassForNameException;
 
 /**
  * Servlet implementation class RootServlet
@@ -25,6 +26,9 @@ public class RootServlet extends HttpServlet {
 	protected transient ServletContext context;
 	protected transient Models models;
 	
+	/**
+	 * 从web.xml中读取配置
+	 */
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init();
@@ -32,15 +36,20 @@ public class RootServlet extends HttpServlet {
         final String routesParam = config.getInitParameter(MODELS);
         try {
         	models = createInstance(routesParam, Models.class);
-        } catch (ClassForNameException e) {
+        } catch (ActionException e) {
             throw new ServletException(e);
-        }
+        } catch (ClassForNameException e) {
+        	throw new ServletException(e);
+		}
     }
     
+    /**
+     * 统一处理请求
+     */
     @Override
-    public void service(HttpServletRequest req, HttpServletResponse res)
+    public void service(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Env.create(req, res, context);
+        Env.create(request, response, context);
         try {
             final Runnable action = models.getFunc().exec();
             action.run();
@@ -50,15 +59,5 @@ public class RootServlet extends HttpServlet {
             Env.destroy();
         }
     }
-    
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-//	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//		// 获取输出流
-//		PrintWriter out = response.getWriter();
-//		
-//		out.println("first servlet");
-//	}
 
 }
