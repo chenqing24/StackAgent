@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import cq.core.exception.ActionException;
 import cq.core.exception.ClassForNameException;
+import cq.core.route.Route;
 
 /**
  * Servlet implementation class RootServlet
@@ -21,10 +22,10 @@ import cq.core.exception.ClassForNameException;
 @WebServlet("/RootServlet")
 public class RootServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private static final String MODELS = "models";	// 配置中绑定的模型的key
+	private static final String ROUTES = "routes";	// 配置中绑定的路由
 	
 	protected transient ServletContext context;
-	protected transient Models models;
+	protected transient Route route;
 	
 	/**
 	 * 从web.xml中读取配置
@@ -33,9 +34,9 @@ public class RootServlet extends HttpServlet {
     public void init(ServletConfig config) throws ServletException {
         super.init();
         context = config.getServletContext();
-        final String routesParam = config.getInitParameter(MODELS);
+        final String routesParam = config.getInitParameter(ROUTES);
         try {
-        	models = createInstance(routesParam, Models.class);
+        	route = createInstance(routesParam, Route.class);
         } catch (ActionException e) {
             throw new ServletException(e);
         } catch (ClassForNameException e) {
@@ -51,7 +52,7 @@ public class RootServlet extends HttpServlet {
             throws ServletException, IOException {
         Env.create(request, response, context);
         try {
-            final Runnable action = models.getFunc().exec();
+            final Runnable action = route.getBinder().bind();
             action.run();
         } catch (RuntimeException e) {
             throw new ServletException(e);

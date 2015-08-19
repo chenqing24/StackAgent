@@ -1,4 +1,4 @@
-package cq.core;
+package cq.core.old;
 
 import java.io.IOException;
 import javax.servlet.Filter;

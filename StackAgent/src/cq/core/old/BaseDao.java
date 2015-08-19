@@ -1,4 +1,4 @@
-package cq.core;
+package cq.core.old;
 
 import java.io.Serializable;
 import java.util.Collection;

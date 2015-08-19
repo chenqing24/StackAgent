@@ -1,4 +1,4 @@
-package cq.core;
+package cq.core.old;
 
 /**
  * 通用常量

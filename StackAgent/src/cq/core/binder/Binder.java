@@ -1,12 +1,12 @@
-package cq.core;
+package cq.core.binder;
 
 /**
- * 模型绑定解释器
+ * 路由绑定器
  * @author chenqing24@163.com
  */
-public interface Resolver {
+public interface Binder {
 
-    Runnable exec();
+    Runnable bind();
 
     /**
      * 跳至path并执行
