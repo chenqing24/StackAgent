@@ -1,10 +1,6 @@
 package cq.core.route;
 
-import com.ghosthack.turismo.Resolver;
-import com.ghosthack.turismo.Routes;
-import com.ghosthack.turismo.action.NotFoundAction;
-import com.ghosthack.turismo.resolver.MapResolver;
-
+import cq.core.action.NotFoundAction;
 import cq.core.binder.Binder;
 import cq.core.binder.MapBinder;
 
@@ -19,6 +15,7 @@ public abstract class RouteMap implements Route {
     protected static final String TRACE = "TRACE";
     
     protected final Binder binder;
+    protected abstract void map();
     
     public RouteMap() {
     	binder = new MapBinder();
@@ -28,45 +25,42 @@ public abstract class RouteMap implements Route {
     }
 
     @Override
-    public Resolver getResolver() {
-        return resolver;
+    public Binder getBinder() {
+        return binder;
     }
-
-    protected abstract void map();
 
     // Shortcuts methods
 
     protected void get(final String path, Runnable runnable) {
-        resolver.route(GET, path, runnable);
+    	binder.route(GET, path, runnable);
     }
 
     protected void post(final String path, Runnable runnable) {
-        resolver.route(POST, path, runnable);
+    	binder.route(POST, path, runnable);
     }
 
     protected void put(final String path, Runnable runnable) {
-        resolver.route(PUT, path, runnable);
+    	binder.route(PUT, path, runnable);
     }
 
     protected void head(final String path, Runnable runnable) {
-        resolver.route(HEAD, path, runnable);
+    	binder.route(HEAD, path, runnable);
     }
 
     protected void options(final String path, Runnable runnable) {
-        resolver.route(OPTIONS, path, runnable);
+    	binder.route(OPTIONS, path, runnable);
     }
 
     protected void delete(final String path, Runnable runnable) {
-        resolver.route(DELETE, path, runnable);
+    	binder.route(DELETE, path, runnable);
     }
 
     protected void trace(final String path, Runnable runnable) {
-        resolver.route(TRACE, path, runnable);
+    	binder.route(TRACE, path, runnable);
     }
 
     protected void route(Runnable runnable) {
-        resolver.route(runnable);
+    	binder.route(runnable);
     }
-
 
 }
