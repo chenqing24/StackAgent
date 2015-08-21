@@ -19,7 +19,6 @@ public abstract class RouteMap implements Route {
     
     public RouteMap() {
     	binder = new MapBinder();
-    	// TODO 2015-08-19
     	binder.route(new NotFoundAction());
         map();
     }
