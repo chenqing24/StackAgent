@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import cq.core.exception.ActionException;
 import cq.core.exception.ClassForNameException;
+import cq.core.ioc.BeanFactory;
 import cq.core.route.Route;
 
 /**
@@ -23,6 +24,7 @@ import cq.core.route.Route;
 public class RootServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private static final String ROUTES = "routes";	// 配置中绑定的路由
+    public static final String INIT_FACTORY_NAME="_my_bean_factory";
 	
 	protected transient ServletContext context;
 	protected transient Route route;
@@ -33,10 +35,21 @@ public class RootServlet extends HttpServlet {
     @Override
     public void init(ServletConfig config) throws ServletException {
         super.init();
+        BeanFactory beanFactory=null;  
         context = config.getServletContext();
         final String routesParam = config.getInitParameter(ROUTES);
         try {
         	route = createInstance(routesParam, Route.class);
+        	
+        	// ioc加载
+        	String configLocation =config.getInitParameter("configLocation");  
+            if (configLocation==null) {  
+                //如果在web.xml里面没有配置properties文件的名字则  
+                beanFactory=new BeanFactory();  
+            }else {  
+                beanFactory=new BeanFactory(configLocation);  
+            }  
+            config.getServletContext().setAttribute(INIT_FACTORY_NAME, beanFactory);
         } catch (ActionException e) {
             throw new ServletException(e);
         } catch (ClassForNameException e) {

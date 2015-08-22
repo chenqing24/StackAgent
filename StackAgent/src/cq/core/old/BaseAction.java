@@ -4,15 +4,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 /**
  * Action模板
  * @author chenqing24@163.com
  */
 public class BaseAction {
-	protected static Log logger = LogFactory.getLog(BaseAction.class);
+//	protected static Log logger = LogFactory.getLog(BaseAction.class);
 	
 	protected HttpServletRequest request;
 	protected HttpSession session;
