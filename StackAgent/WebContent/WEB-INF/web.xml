@@ -8,10 +8,6 @@
   <servlet>
     <servlet-name>RootServlet</servlet-name>
     <servlet-class>cq.core.RootServlet</servlet-class>
-<!--     <init-param>
-        <param-name>routes</param-name>
-        <param-value>cq.routes.AppRoutes</param-value>
-    </init-param> -->
     <init-param>
         <param-name>configLocation</param-name>
         <param-value>beans.properties</param-value>
