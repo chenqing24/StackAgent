@@ -1,5 +1,6 @@
 package cq.routes;
 
+import cq.action.TestAction;
 import cq.core.action.BaseAction;
 import cq.core.route.RouteMap;
 
@@ -18,6 +19,8 @@ public class AppRoutes extends RouteMap {
                 print("Hello World!");
             }
         });
+        
+        get("/hi", new TestAction());
     }
 
 }
