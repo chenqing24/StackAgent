@@ -15,7 +15,12 @@ public class TestAction extends BaseAction {
 	@Override
 	public void run() {
 		this.putTplMap("hi", "hello");
-        this.tplPrint("hi!");
+        try {
+			this.tplPrint("hi");
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }

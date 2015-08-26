@@ -6,10 +6,10 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.jexl2.Expression;
-import org.apache.commons.jexl2.JexlContext;
-import org.apache.commons.jexl2.JexlEngine;
-import org.apache.commons.jexl2.MapContext;
+import org.apache.commons.jexl.Expression;
+import org.apache.commons.jexl.ExpressionFactory;
+import org.apache.commons.jexl.JexlContext;
+import org.apache.commons.jexl.JexlHelper;
 
 import cq.core.Env;
 
@@ -87,15 +87,15 @@ public abstract class BaseAction implements Runnable {
 	/**
 	 * 
 	 * @param string
+	 * @throws Exception 
 	 */
-	protected void tplPrint(String string) {
+	@SuppressWarnings("unchecked")
+	protected void tplPrint(String expression) throws Exception {
 		// 创建模板引擎
-		JexlEngine jexl = new JexlEngine();
-		Expression e = jexl.createExpression(string);
-		JexlContext jc = new MapContext();
-		
+		JexlContext jc = JexlHelper.createContext();
+		Expression e = ExpressionFactory.createExpression(expression); 
 		for (String key : tplMap.keySet()){
-			jc.set(key, tplMap.get(key));
+			jc.getVars().put(key, tplMap.get(key));
 		}
 		
 		String outPrint = "";

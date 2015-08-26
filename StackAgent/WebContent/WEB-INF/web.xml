@@ -4,7 +4,18 @@
     xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" 
     id="WebApp_ID" version="3.0">
   <display-name>StackAgent</display-name>
-  
 
+	<servlet>
+		<servlet-name>RootServlet</servlet-name>
+		<servlet-class>cq.core.RootServlet</servlet-class>
+		<init-param>
+			<param-name>configLocation</param-name>
+			<param-value>beans.properties</param-value>
+		</init-param>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>RootServlet</servlet-name>
+		<url-pattern>/*</url-pattern>
+	</servlet-mapping>
   
 </web-app>
