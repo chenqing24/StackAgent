@@ -4,63 +4,72 @@ import java.sql.SQLException;
 import java.util.List;
 
 /**
- * 通用DAO
+ * 
  * @author chenqing24@163.com
  */
-public interface BaseDao {
-	
-	/**
-	 * 新增记录
-	 * @param sql
-	 * @return id
+public abstract class BaseDao implements Dao {
+
+	/* (non-Javadoc)
+	 * @see cq.core.orm.Dao#save(java.lang.String)
 	 */
-	public Long save(String sql) throws SQLException;
-	
-	/**
-	 * 根据id删除记录
-	 * @param id
-	 * @return 影响记录数
-	 * @throws SQLException
+	@Override
+	public Long save(String sql) throws SQLException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	/* (non-Javadoc)
+	 * @see cq.core.orm.Dao#delete(java.lang.Long)
 	 */
-	public int delete(Long id) throws SQLException;
-	
-	/**
-	 * 更新指定实体
-	 * @param clazz
-	 * @return 影响记录数
-	 * @throws SQLException
+	@Override
+	public int delete(Long id) throws SQLException {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	/* (non-Javadoc)
+	 * @see cq.core.orm.Dao#update(java.lang.Class)
 	 */
-	public int update(Class<?> clazz) throws SQLException;
-	
-	/**
-	 * 根据id获取实体
-	 * @param id
-	 * @return
+	@Override
+	public int update(Class<?> clazz) throws SQLException {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	/* (non-Javadoc)
+	 * @see cq.core.orm.Dao#get(java.lang.Long)
 	 */
-	public Object get(Long id);
-	
-	/**
-	 * 根据sql获取实体一览
-	 * @param sql
-	 * @param params
-	 * @return 
+	@Override
+	public Object get(Long id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	/* (non-Javadoc)
+	 * @see cq.core.orm.Dao#find(java.lang.String, java.lang.Object[])
 	 */
-	public List<?> find(String sql, Object...params);
-	
-	/**
-	 * 根据sql获取实体记录数
-	 * @param sql
-	 * @param params
-	 * @return
+	@Override
+	public List<?> find(String sql, Object... params) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	/* (non-Javadoc)
+	 * @see cq.core.orm.Dao#getTotal(java.lang.String, java.lang.Object[])
 	 */
-	public long getTotal(String sql, Object...params);
-	
-	/**
-	 * 分页查询
-	 * @param first
-	 * @param size
-	 * @param sql
-	 * @return
+	@Override
+	public long getTotal(String sql, Object... params) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	/* (non-Javadoc)
+	 * @see cq.core.orm.Dao#selectByPage(int, int, java.lang.String)
 	 */
-	public List<?> selectByPage(final int first, final int size, final String sql);
+	@Override
+	public List<?> selectByPage(int first, int size, String sql) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
